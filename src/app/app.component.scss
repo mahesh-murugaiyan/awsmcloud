@@ -8,9 +8,9 @@
   }
 
 }
-  
-.qtemplate{
-    background-color: azure;
+
+@mixin question-panel($bgcolor){
+    background-color: $bgcolor;
     width: 300px;
     border-color: silver;
     margin-bottom: 5px;
@@ -18,17 +18,18 @@
 
 }
 
+//style for the questions in template area
+.qtemplate{
+    @include question-panel(azure);
+}
+
+//style for the questions in selected area
 .qselected{
-    background-color: coral;
-    width: 300px;
-    border-color: silver;
-    margin-bottom: 5px;
-    padding: 5px;
-    
+    @include question-panel(coral);
 }
 
 .pselected{
-    background-color: antiquewhite;
+    background-color:cornsilk;
     max-height: 800px;
     overflow-y: auto;
 }
