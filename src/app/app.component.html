@@ -5,7 +5,7 @@
       (cdkDropListDropped)="drop($event)"
       #templateQuestions="cdkDropList"
   >
-    TEMPLATE
+    <h4>TEMPLATE QUESTIONS</h4>
     
     <mat-card class="qtemplate"  *ngFor="let question of tquestions" 
           cdkDrag
@@ -28,7 +28,7 @@
     (cdkDropListDropped)="reorderSelected($event)"
     
   >
-    SELECTED
+    <H4>SELECTED QUESTIONS</H4>
     <mat-card cdkDrag
     *ngFor="let q of squestions"
     class="qselected"
