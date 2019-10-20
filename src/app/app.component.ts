@@ -8,18 +8,19 @@ import {CdkDragDrop, moveItemInArray,copyArrayItem} from '@angular/cdk/drag-drop
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'prime';
+  title = 'MSandbox';
 
+  //list of questions on the template
   tquestions=['Question 1','Question 2','Question 3','Question 4','Question 5'
   ];
 
+  //this list holds the seleted questions
   squestions=['Placeholder Question'];
 
-  drop(event: CdkDragDrop<string[]>) {
-    // moveItemInArray(this.tquestions, event.previousIndex, event.currentIndex);
-    // console.log(event.previousIndex+" "+event.currentIndex+" "+this.tquestions);
-  }
-
+  /*
+    This method handles re-order within selected list and 
+    re-order when a question is dropped from template.
+  */
   reorderSelected(event:CdkDragDrop<string[]>){
 
     if(event.container===event.previousContainer){
