@@ -1,0 +1,65 @@
+.item{
+    border-style:solid;border-width: 1px;
+    border-color:silver;width:500px; height: 100px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: content-box;
+    cursor: move;
+    background: white;
+    margin-bottom: 5px;
+}
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+
+  .qcomposer{
+    // width: 500px;
+    // height: 500px;
+    background-color: darkseagreen;
+
+}
+
+.qpanel{
+    background-color: azure;
+    width: 300px;
+    // border-width: 1px;
+    // border-style: solid;
+    border-color: silver;
+    margin-bottom: 5px;
+    padding: 5px;
+
+}
+
+.qselectedpanel{
+    background-color: coral;
+    width: 300px;
+    // border-width: 1px;
+    // border-style: solid;
+    border-color: silver;
+    margin-bottom: 5px;
+    padding: 5px;
+    
+}
+
+.qpanel_pl{
+    background-color: silver;
+    width: 300px;
+    // border-width: 1px;
+    // border-style: solid;
+    border-color: silver;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.qselector{
+    background-color: antiquewhite;
+    max-height: 800px;
+    overflow-y: auto;
+}
