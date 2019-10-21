@@ -1,6 +1,6 @@
 <div style="display:flex;padding:50px">
   <mat-card cdkDropList  
-      [cdkDropListConnectedTo] ="[selectedquestions]"
+      [cdkDropListConnectedTo] ="[selectedquestions,finalquestions]"
       [cdkDropListData]="tquestions"
       (cdkDropListDropped)="drop($event)"
       #templateQuestions="cdkDropList"
@@ -28,9 +28,29 @@
     (cdkDropListDropped)="reorderSelected($event)"
     
   >
-    <H4>SELECTED QUESTIONS</H4>
+    <H4>DRAFT QUESTIONS</H4>
     <mat-card cdkDrag
     *ngFor="let q of squestions"
+    class="qselected"
+    >
+      {{q}}
+      <mat-radio-group class="mat-radio-group">
+          <mat-list-item><mat-radio-button  value="1" class="mat-radio-button">Option 1</mat-radio-button></mat-list-item>
+          <mat-list-item><mat-radio-button  value="2" class="mat-radio-button">Option 2</mat-radio-button></mat-list-item>
+        </mat-radio-group>
+    </mat-card>
+  </mat-card>
+
+  <mat-card  class="pselected"
+    cdkDropList
+    #finalquestions="cdkDropList"
+    [cdkDropListData]="fquestions" 
+    (cdkDropListDropped)="reorderSelected($event)"
+    
+  >
+    <H4>FINAL QUESTIONS</H4>
+    <mat-card cdkDrag
+    *ngFor="let q of fquestions"
     class="qselected"
     >
       {{q}}

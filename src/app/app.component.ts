@@ -16,13 +16,14 @@ export class AppComponent {
 
   //this list holds the seleted questions
   squestions=['Placeholder Question'];
+  fquestions=[];
 
   /*
     This method handles re-order within selected list and 
     re-order when a question is dropped from template.
   */
   reorderSelected(event:CdkDragDrop<string[]>){
-
+    console.log("event.container -> ",event.container.id);
     if(event.container===event.previousContainer){
       moveItemInArray(event.container.data,event.previousIndex,event.currentIndex);
     }else{
