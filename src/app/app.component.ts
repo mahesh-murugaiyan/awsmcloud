@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray,copyArrayItem} from '@angular/cdk/drag-drop';
-
+import {MatListOption} from '@angular/Material';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,6 @@ export class AppComponent {
   //this list holds the seleted questions
   squestions=['Placeholder Question'];
   fquestions=[];
-
   /*
     This method handles re-order within selected list and 
     re-order when a question is dropped from template.
@@ -36,5 +35,16 @@ export class AppComponent {
           event.container.data,event.previousIndex,this.squestions.length);
         }
       }
+    
+  onSelectChange(e,v){
+    console.log("Here",e,v)
+    for(let e of v){
+      console.log(e.value);
     }
+
+  }
+
+    
+}
+
 

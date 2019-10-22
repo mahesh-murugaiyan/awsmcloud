@@ -64,14 +64,16 @@
 
 <div style="widht: 400px" >
   <mat-selection-list 
+    #lquestions
     cdkDropList
     (cdkDropListDropped)="reorderSelected($event)"
     [cdkDropListData]="tquestions" 
-
+    (selectionChange)="onSelectChange($event,lquestions.selectedOptions.selected)"
     >
 
     <mat-list-option  cdkDrag
       *ngFor="let q of tquestions"
+      [value]='q'
     >{{q}}</mat-list-option>
 
 
