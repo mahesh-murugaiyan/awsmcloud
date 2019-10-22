@@ -25,12 +25,8 @@ export class AppComponent {
   reorderSelected(event:CdkDragDrop<string[]>){
     console.log("event.container -> ",event.container);
     if(event.container===event.previousContainer){
-      console.log('event.container.data -> ',event.container.data)
-      console.log('event.previous, current -> ',event.previousIndex,event.currentIndex)
-
       moveItemInArray(event.container.data,event.previousIndex,event.currentIndex);
     }else{
-        console.log("else being fired")
         copyArrayItem(
           event.previousContainer.data,
           event.container.data,event.previousIndex,this.squestions.length);
