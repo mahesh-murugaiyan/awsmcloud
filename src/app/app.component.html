@@ -1,5 +1,5 @@
 <div style="display:flex;padding:50px">
-  <mat-card cdkDropList  
+  <mat-card cdkDropList   
       [cdkDropListConnectedTo] ="[selectedquestions,finalquestions]"
       [cdkDropListData]="tquestions"
       (cdkDropListDropped)="drop($event)"
@@ -10,6 +10,7 @@
     <mat-card class="qtemplate"  *ngFor="let question of tquestions" 
           cdkDrag
           cdkDragPlaceholder
+
     >
     
       {{question}}
@@ -61,4 +62,21 @@
     </mat-card>
   </mat-card>
 
+<div style="widht: 400px" >
+  <mat-selection-list 
+    cdkDropList
+    (cdkDropListDropped)="reorderSelected($event)"
+    [cdkDropListData]="tquestions" 
+
+    >
+
+    <mat-list-option  cdkDrag
+      *ngFor="let q of tquestions"
+    >{{q}}</mat-list-option>
+
+
+  </mat-selection-list>
 </div>
+
+</div>
+
