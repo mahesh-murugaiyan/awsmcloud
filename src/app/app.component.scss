@@ -33,3 +33,18 @@
     max-height: 520px;
     overflow-y: auto;
 }
+
+.cdk-drag-placeholder {
+    background: white;
+    border: dashed 1px red;
+    transition: transform 500ms ease;
+}
+.cdk-drag-preview{
+  background-color:aqua;
+}
+
+.listdragstyle{
+    background: white;
+    border: dashed 1px red;
+    transition: transform 500ms ease;
+}

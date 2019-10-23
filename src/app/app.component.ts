@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import {CdkDragDrop, moveItemInArray,copyArrayItem} from '@angular/cdk/drag-drop';
-import {MatListOption} from '@angular/Material';
+import { Component,ViewChild } from '@angular/core';
+import {CdkDragDrop,CdkDragStart, moveItemInArray,copyArrayItem} from '@angular/cdk/drag-drop';
+import {MatListOption,MatSelectionList} from '@angular/Material';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +10,16 @@ import {MatListOption} from '@angular/Material';
 export class AppComponent {
   title = 'MSandbox';
 
+  liststyle="";
+
   //list of questions on the template
   tquestions=['Question 1','Question 2','Question 3','Question 4','Question 5'
   ];
-
+  
   //this list holds the seleted questions
   squestions=['Placeholder Question'];
   fquestions=[];
+  selectedQuestions=[]
   /*
     This method handles re-order within selected list and 
     re-order when a question is dropped from template.
@@ -35,16 +38,29 @@ export class AppComponent {
           event.container.data,event.previousIndex,this.squestions.length);
         }
       }
+  
+  onQClick(v:MatListOption[]){
+    // console.log("v->",v);
     
-  onSelectChange(e,v){
-    console.log("Here",e,v)
-    for(let e of v){
-      console.log(e.value);
+    this.selectedQuestions=[];
+    for(let itm of v){
+      let t:MatListOption  = itm;
+      
+      // console.log("t in loop : ",t);
+      this.selectedQuestions.push(itm.value);
     }
-
+    console.log("Selected Questions ->",this.selectedQuestions);
   }
 
+  @ViewChild('lquestions',{static:false})  qList: MatSelectionList;
+
+  listDrag(event:CdkDragStart<String[]>){
+    console.log("Drag event for the list",event);
+    console.log(this.qList);
+    //listdragstyle
     
-}
+  }
+    
+} 
 
 
