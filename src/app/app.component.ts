@@ -1,6 +1,6 @@
-import { Component,ViewChild } from '@angular/core';
-import {CdkDragDrop,CdkDragStart, moveItemInArray,copyArrayItem} from '@angular/cdk/drag-drop';
-import {MatListOption,MatSelectionList} from '@angular/Material';
+import { Component, ViewChild } from '@angular/core';
+import {CdkDragDrop, CdkDragStart, moveItemInArray,copyArrayItem} from '@angular/cdk/drag-drop';
+import {MatListOption, MatSelectionList} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -39,26 +39,45 @@ export class AppComponent {
         }
       }
   
-  onQClick(v:MatListOption[]){
-    // console.log("v->",v);
-    
+  onQClick(selectionList:MatListOption[]){
+
     this.selectedQuestions=[];
-    for(let itm of v){
+  for(let itm of selectionList){
       let t:MatListOption  = itm;
+      this.tquestions.forEach((q)=>{
+        if(q===itm.value){
+          this.selectedQuestions.push(itm.value);
+        }
+      })
       
-      // console.log("t in loop : ",t);
-      this.selectedQuestions.push(itm.value);
     }
     console.log("Selected Questions ->",this.selectedQuestions);
   }
 
-  @ViewChild('lquestions',{static:false})  qList: MatSelectionList;
 
+  reorderList(event:CdkDragDrop<string[]>){
+    // console.log("event.container -> ",event.container);
+    console.log("Items to copy-> ",this.selectedQuestions)
+    console.log("previousIndex", event.previousIndex);
+    console.log("currentIndex", event.currentIndex);
+
+    this.selectedQuestions.forEach((itm)=>{
+      console.log("previousIndex", event.previousIndex);
+
+        moveItemInArray(itm,event.previousIndex,event.currentIndex);
+
+    })
+  }
+
+
+
+
+
+  @ViewChild('lquestions',{static:false}) 
+  qList: MatSelectionList;
   listDrag(event:CdkDragStart<String[]>){
-    console.log("Drag event for the list",event);
-    console.log(this.qList);
-    //listdragstyle
-    
+    // console.log("Drag event for the list",this.qList);
+    //implement coloring 
   }
     
 } 

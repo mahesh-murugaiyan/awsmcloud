@@ -6,7 +6,7 @@
     cdkDropList
     [cdkDropListData]="tquestions" 
     (selectionChange)="onQClick(lquestions.selectedOptions.selected)"
-    (cdkDropListDropped)="listDrag"
+    (cdkDropListDropped)="reorderList($event)"
     
     >
 
