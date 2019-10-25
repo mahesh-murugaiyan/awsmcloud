@@ -2,11 +2,12 @@
   <mat-tab label="LIST">
     <div style="display:flex; width: 600px" >
       <mat-selection-list 
-        #lquestions="cdkDropList"
+        #lquestions
+        (selectionChange)="onQClick()"
+        [(ngModel)]="selLItems"
         cdkDropList
         [cdkDropListConnectedTo] ="[targetq]"
         [cdkDropListData]="tquestions" 
-        (selectionChange)="onQClick(lquestions.selectedOptions.selected)"
         (cdkDropListDropped)="reorderList($event)"
         >
         
