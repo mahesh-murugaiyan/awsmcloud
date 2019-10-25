@@ -10,6 +10,7 @@ import {MatListOption, MatSelectionList} from '@angular/material';
 export class AppComponent {
   title = 'MSandbox';
   liststyle="";
+  stylevar="";
 
   @ViewChild('lquestions',{static:false}) 
   qList: MatSelectionList;
@@ -91,58 +92,29 @@ export class AppComponent {
 
     //get the index of selected questions from the main question array
   onQClick(){
-
     //clear the previous selections and add all selected items from the list
     this.selQIdx=[];
     console.log(this.selLItems);
-    // this.selLItems=[];
-
-    // this.selLItems=selLItems;
-    // selLItems.forEach(itm=>{
-    //     this.tquestions.forEach((q)=>{
-    //       if(q===itm.value){
-    //         this.selQIdx.push(this.tquestions.indexOf(itm.value));
-    //       }
-    //     })
-    //   });
-    //   console.log("Selcted: ",this.selQIdx);
   }
 
 
   copyToTargetList(event:CdkDragDrop<string[]>){
     if(event.container===event.previousContainer){
-      console.log('event.container.data -> ',event.container.data)
-      console.log('event.previous, current -> ',event.previousIndex,event.currentIndex)
       moveItemInArray(event.container.data,event.previousIndex,event.currentIndex);
     }else{
-    //  copyArrayItem(
-    //       event.previousContainer.data,
-    //       event.container.data,event.previousIndex,this.squestions.length);
-          let temp=[];
-          for(let itm of this.selLItems){
-            temp.push(itm.value);
-          }
-
-         console.log(temp)  ;
-
-          this.squestions.concat(temp);
-            
-         console.log(this.squestions)  ;
-
-
-
-          
+      for(let itm of this.qList.selectedOptions.selected){
+        console.log("-> ",itm.value);
+        this.squestions.push(itm.value);            
+        itm.selected=false;
+      }
 
     }
 
   }
 
-
-
-  
+ 
   listDrag(event:CdkDragStart<String[]>){
-    // console.log("Drag event for the list",this.qList);
-    //implement coloring 
+
   }
     
 } 
