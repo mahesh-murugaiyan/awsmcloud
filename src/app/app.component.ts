@@ -20,7 +20,7 @@ export class AppComponent {
   ];
   
   //this list holds the seleted questions
-  squestions=['Placeholder'];
+  squestions=[];
   fquestions=[];
   selQIdx:number[]=[];
   selLItems:MatListOption[];
@@ -81,33 +81,19 @@ export class AppComponent {
 
 
 
-
-
-
-
-
-
-
-
-
-    //get the index of selected questions from the main question array
-  onQClick(){
-    //clear the previous selections and add all selected items from the list
-    this.selQIdx=[];
-    console.log(this.selLItems);
-  }
-
-
   copyToTargetList(event:CdkDragDrop<string[]>){
     if(event.container===event.previousContainer){
       moveItemInArray(event.container.data,event.previousIndex,event.currentIndex);
     }else{
-      for(let itm of this.qList.selectedOptions.selected){
-        console.log("-> ",itm.value);
-        this.squestions.push(itm.value);            
-        itm.selected=false;
-      }
+      if(!this.selLItems || this.selLItems.length===0 ){
+        copyArrayItem(event.previousContainer.data,event.container.data,event.previousIndex,event.currentIndex);
+      }else{
+        for(let itm of this.qList.selectedOptions.selected){
+          this.squestions.push(itm.value);            
+          itm.selected=false;
+        }
 
+      }
     }
 
   }
