@@ -11,6 +11,7 @@
         (cdkDropListDropped)="reorderList($event)"
         >
 
+
           <mat-list-option  
           cdkDrag
             (cdkDragStarted)="listDrag($event)"
@@ -29,7 +30,7 @@
               [cdkDropListData]="squestions" 
               class="destList"
           >
-            <mat-list-item disabled>DROP YOUR QUESTIONS HERE</mat-list-item>
+            <mat-list-item disabled>DROP QUESTIONS</mat-list-item>
             <mat-list-option cdkDrag *ngFor="let q of squestions">
                 {{q}}
             </mat-list-option>

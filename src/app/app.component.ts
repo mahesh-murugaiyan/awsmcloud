@@ -12,6 +12,8 @@ export class AppComponent {
   liststyle="";
   stylevar="";
 
+  toggler:boolean=false;
+
   @ViewChild('lquestions',{static:false}) 
   qList: MatSelectionList;
 
@@ -98,9 +100,8 @@ export class AppComponent {
 
   }
 
- 
-  listDrag(event:CdkDragStart<String[]>){
-
+  toggleSelection(){
+    this.toggler=!this.toggler;
   }
     
 } 
