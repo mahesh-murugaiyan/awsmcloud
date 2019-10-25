@@ -11,7 +11,8 @@
         (cdkDropListDropped)="reorderList($event)"
         >
 
-          <mat-list-option  cdkDrag
+          <mat-list-option  
+          cdkDrag
             (cdkDragStarted)="listDrag($event)"
             *ngFor="let q of tquestions"
             [value]='q'
