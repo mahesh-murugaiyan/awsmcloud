@@ -17,9 +17,10 @@ export class AppComponent {
   ];
   
   //this list holds the seleted questions
-  squestions=['Placeholder Question'];
+  squestions=['Placeholder'];
   fquestions=[];
-  selectedQuestions=[]
+  selQIdx:number[]=[];
+  selLItems:MatListOption[];
   /*
     This method handles re-order within selected list and 
     re-order when a question is dropped from template.
@@ -39,42 +40,73 @@ export class AppComponent {
         }
       }
   
-  onQClick(selectionList:MatListOption[]){
+  //get the index of selected questions from the main question array
+  onQClick(selLItems:MatListOption[]){
+    //clear the previous selections and add all selected items from the list
+    this.selQIdx=[];
+    this.selLItems=[];
+    this.selLItems=selLItems;
 
-    this.selectedQuestions=[];
-  for(let itm of selectionList){
-      let t:MatListOption  = itm;
-      this.tquestions.forEach((q)=>{
-        if(q===itm.value){
-          this.selectedQuestions.push(itm.value);
-        }
-      })
-      
-    }
-    console.log("Selected Questions ->",this.selectedQuestions);
+    selLItems.forEach(itm=>{
+        this.tquestions.forEach((q)=>{
+          if(q===itm.value){
+            this.selQIdx.push(this.tquestions.indexOf(itm.value));
+          }
+        })
+      });
+      console.log("Selcted: ",this.selQIdx);
   }
 
 
   reorderList(event:CdkDragDrop<string[]>){
     // console.log("event.container -> ",event.container);
-    console.log("Items to copy-> ",this.selectedQuestions)
-    console.log("previousIndex", event.previousIndex);
-    console.log("currentIndex", event.currentIndex);
+    console.log("Items to copy [idx] -> ", this.selQIdx);
+    console.log("Initial position ",event.previousIndex," drop position", event.currentIndex);
+    let tmp = this.tquestions;
+    let popped:Array<string>;
+    this.selQIdx.map((idx)=>{
+          popped.concat(this.tquestions.splice(idx,1));
+      }
+      );
+    console.log("Popped ->  ",popped);
 
-    this.selectedQuestions.forEach((itm)=>{
-      console.log("previousIndex", event.previousIndex);
+    // this.selQIdx.forEach((idx:number)=>{
+    //     console.log("Moving item -> ", this.tquestions[idx]," current index-> ", event.currentIndex);
 
-        moveItemInArray(itm,event.previousIndex,event.currentIndex);
+    //     moveItemInArray(
+    //       this.tquestions,
+    //       this.tquestions.indexOf(this.tquestions[idx]),//previousIndex
+    //       event.currentIndex  //current drop position
+    //       );
 
-    })
+    // });
+    this.selQIdx=[];
+    this.selLItems.forEach( (opt:MatListOption)=>{
+        opt.selected=false;
+      }
+    );
+
   }
 
+  copyToTargetList(event:CdkDragDrop<string[]>){
+    console.log("")
+    if(event.container===event.previousContainer){
+      console.log('event.container.data -> ',event.container.data)
+      console.log('event.previous, current -> ',event.previousIndex,event.currentIndex)
 
+      moveItemInArray(event.container.data,event.previousIndex,event.currentIndex);
+    }else{
+     copyArrayItem(
+          event.previousContainer.data,
+          event.container.data,event.previousIndex,this.squestions.length);
+    }
+  }
 
 
 
   @ViewChild('lquestions',{static:false}) 
   qList: MatSelectionList;
+  
   listDrag(event:CdkDragStart<String[]>){
     // console.log("Drag event for the list",this.qList);
     //implement coloring 

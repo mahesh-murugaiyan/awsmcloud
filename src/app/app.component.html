@@ -1,28 +1,41 @@
 <mat-tab-group>
   <mat-tab label="LIST">
-    <div style="width: 400px" >
-  <mat-selection-list 
-    #lquestions
-    cdkDropList
-    [cdkDropListData]="tquestions" 
-    (selectionChange)="onQClick(lquestions.selectedOptions.selected)"
-    (cdkDropListDropped)="reorderList($event)"
-    
-    >
+    <div style="display:flex; width: 600px" >
+      <mat-selection-list 
+        #lquestions="cdkDropList"
+        cdkDropList
+        [cdkDropListConnectedTo] ="[targetq]"
+        [cdkDropListData]="tquestions" 
+        (selectionChange)="onQClick(lquestions.selectedOptions.selected)"
+        (cdkDropListDropped)="reorderList($event)"
+        >
+        
+          <mat-list-option  cdkDrag
+            (cdkDragStarted)="listDrag($event)"
+            *ngFor="let q of tquestions"
+            [value]='q'
+            checkboxPosition='before'
+            [ngClass]="liststyle"
+            >{{q}}</mat-list-option>
+      </mat-selection-list>
+      
+      <div style="margin-left:50px">
+          <mat-selection-list
+              #targetq ="cdkDropList"
+              cdkDropList 
+              (cdkDropListDropped)="copyToTargetList($event)"
+              [cdkDropListData]="squestions" 
+              class="destList"
+          >
+            
+            <mat-list-option cdkDrag *ngFor="let q of squestions">
+                {{q}}
+            </mat-list-option>
+          </mat-selection-list>
+      </div>
 
-    <mat-list-option  cdkDrag
-      (cdkDragStarted)="listDrag($event)"
-
-      *ngFor="let q of tquestions"
-      [value]='q'
-      checkboxPosition='before'
-
-      [ngClass]="liststyle"
-
-    >{{q}}</mat-list-option>
 
 
-  </mat-selection-list>
 </div>
   </mat-tab>
   
